@@ -214,6 +214,31 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
 
   @Override
   public String getGameState() {
+    String gameState = "+----------------------\n";
+    gameState += "| ∖ " + board[0][2][0].toString() + "  " + board[1][2][0].toString() + "  " + board[2][2][0].toString() + " ∖\n";
+    gameState += "|   ∖                     ∖\n";
+    gameState += "|     ∖ " + board[0][1][0].toString() + "  " + board[1][1][0].toString() + "  " + board[2][1][0].toString() + " ∖\n";
+    gameState += "|       ∖                     ∖\n";
+    gameState += "|         ∖ " + board[0][0][0].toString() + "  " + board[1][0][0].toString() + "  " + board[2][0][0].toString() + " ∖\n";
+    gameState += "|          ---------------------|\n";
+    gameState += "|   " + board[0][2][1].toString() + " |" + board[1][2][1].toString() + "  " + board[2][2][1].toString() + "         |\n";
+    gameState += "|         |                     |\n";
+    gameState += "|       " + board[0][1][1].toString() + "  " + board[1][1][1].toString() + "  " + board[2][1][1].toString() + "     |\n";
+    gameState += "|         |                     |\n";
+    gameState += "|         |  " + board[0][0][1].toString() + "  " + board[1][0][1].toString() + "  " + board[2][0][1].toString() + "|\n";
+    gameState += "|         |                     |\n";
+    gameState += " ∖ " + board[0][2][2].toString() + "  " + board[1][2][2].toString() + "  " + board[2][2][2].toString() + "          |\n";
+    gameState += "   ∖      |                     |\n";
+    gameState += "     ∖ " + board[0][1][2].toString() + "  " + board[1][1][2].toString() + "  " + board[2][1][2].toString() + "      |\n";
+    gameState += "       ∖  |                     |\n";
+    gameState += "         ∖| " + board[0][0][2].toString() + "  " + board[1][0][2].toString() + "  " + board[2][0][2].toString() + " |\n";
+    gameState += "           ---------------------+\n\n";
+    return gameState;
+  }
+
+  //OLD GET GAME STATE
+  /*
+  public String getGameState() {
     String gameState = "";
     gameState += "Top: \n";
     for(int i = 0; i < 3; i++) {
@@ -238,6 +263,7 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     }
     return gameState;
   }
+   */
 
   protected static LocationState[][][] makeBoard() {
     int size = 3;
