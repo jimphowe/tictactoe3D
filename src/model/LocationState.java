@@ -9,7 +9,7 @@ public enum LocationState {
       case RED: return " RED ";
       case WHITE: return "WHITE";
       case BLACK: return "BLACK";
-      case EMPTY: return "EMPTY";
+      case EMPTY: return "  _  ";
       default: throw new IllegalArgumentException();
     }
   }

@@ -1,5 +1,7 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import model.Direction;
 import model.LocationState;
@@ -20,7 +22,7 @@ public class TicTacToeModelTests {
   @Test
   public void testIsGameOver1() {
     TicTacToeModel game = new ThreePlayerImpl();
-    assertEquals(false, game.isGameOver());
+    assertFalse(game.isGameOver());
   }
 
   @Test
@@ -29,13 +31,14 @@ public class TicTacToeModelTests {
     game.move(0, 0, 0, Direction.BACK, LocationState.RED);
     game.move(0, 0, 1, Direction.BACK, LocationState.RED);
     game.move(0, 0, 2, Direction.BACK, LocationState.RED);
-    assertEquals(true, game.isGameOver());
+    assertTrue(game.isGameOver());
   }
 
   @Test
-  public void testFullBoardIsGameOver() {
+  public void testMoveUp() {
     TicTacToeModel game = new ThreePlayerImpl();
-    game.move(0, 0, 0, Direction.BACK, LocationState.RED);
+    game.move(0, 0, 2, Direction.UP, LocationState.WHITE);
+    game.move(0, 0, 2, Direction.UP, LocationState.RED);
   }
 
 }

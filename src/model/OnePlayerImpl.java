@@ -49,6 +49,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
   @Override
   public void move(int x, int y, int z, Direction direction, LocationState player) throws IllegalArgumentException {
     super.move(x,y,z,direction,player);
+    System.out.println(getGameState());
     if(!isGameOver()) {
       try {
         System.out.print(".\n");
@@ -138,48 +139,47 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
         int z = toMove.getZ();
         for(Direction direction : Direction.values()) {
           if(isValidMove(x,y,z,direction)) {
-            board[x][y][z] = LocationState.EMPTY;
             switch(direction) {
               case UP:
                 if(!aRunContains(x,y,z-1,playerColor) && aRunContains(x,y,z,computerColor)) {
                   board[x][y][z] = playerColor;
-                  super.move(x,y,z,direction,computerColor);
                   System.out.print("\n\n(better defending move)Computers move: " + x + " " + y + " " + z + " " + direction.toString() + "\n\n");
+                  super.move(x,y,z,direction,computerColor);
                   return true;
                 }
               case DOWN:
                 if(!aRunContains(x,y,z+1,playerColor) && aRunContains(x,y,z,computerColor)) {
                   board[x][y][z] = playerColor;
-                  super.move(x,y,z,direction,computerColor);
                   System.out.print("\n\n(better defending move)Computers move: " + x + " " + y + " " + z + " " + direction.toString() + "\n\n");
+                  super.move(x,y,z,direction,computerColor);
                   return true;
                 }
               case LEFT:
                 if(!aRunContains(x-1,y,z,playerColor) && aRunContains(x,y,z,computerColor)) {
                   board[x][y][z] = playerColor;
-                  super.move(x,y,z,direction,computerColor);
                   System.out.print("\n\n(better defending move)Computers move: " + x + " " + y + " " + z + " " + direction.toString() + "\n\n");
+                  super.move(x,y,z,direction,computerColor);
                   return true;
                 }
               case RIGHT:
                 if(!aRunContains(x+1,y,z,playerColor) && aRunContains(x,y,z,computerColor)) {
                   board[x][y][z] = playerColor;
-                  super.move(x,y,z,direction,computerColor);
                   System.out.print("\n\n(better defending move)Computers move: " + x + " " + y + " " + z + " " + direction.toString() + "\n\n");
+                  super.move(x,y,z,direction,computerColor);
                   return true;
                 }
               case FRONT:
                 if(!aRunContains(x,y-1,z,playerColor) && aRunContains(x,y,z,computerColor)) {
                   board[x][y][z] = playerColor;
-                  super.move(x,y,z,direction,computerColor);
                   System.out.print("\n\n(better defending move)Computers move: " + x + " " + y + " " + z + " " + direction.toString() + "\n\n");
+                  super.move(x,y,z,direction,computerColor);
                   return true;
                 }
               case BACK:
                 if(!aRunContains(x,y+1,z,playerColor) && aRunContains(x,y,z,computerColor)) {
                   board[x][y][z] = playerColor;
-                  super.move(x,y,z,direction,computerColor);
                   System.out.print("\n\n(better defending move)Computers move: " + x + " " + y + " " + z + " " + direction.toString() + "\n\n");
+                  super.move(x,y,z,direction,computerColor);
                   return true;
                 }
             }
