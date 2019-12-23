@@ -8,4 +8,6 @@ public interface TicTacToeModel {
   boolean isGameOver();
 
   String getGameState();
+
+  void setBoard(LocationState[][][] board);
 }

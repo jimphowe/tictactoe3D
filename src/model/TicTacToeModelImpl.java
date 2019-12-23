@@ -7,12 +7,12 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
 
   protected LocationState[][][] board;
 
+  protected ArrayList<LocationState[][][]> previousBoards;
+
   protected ArrayList<ArrayList<BoardLocation>> runs;
 
-  protected LocationState currentPlayer;
-
   public TicTacToeModelImpl() {
-    // edges
+    // creates a list of all possible runs in the game
 
     //front top left
     ArrayList<BoardLocation> a1 = new ArrayList<>(Arrays.asList(new BoardLocation(0, 0, 0), new BoardLocation(0, 0, 1), new BoardLocation(0, 0, 2)));
@@ -98,7 +98,12 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
             a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44,
             a45, a46, a47, a48, a49));
 
+    // creates the board
     this.board = makeBoard();
+
+    // initializes the board history
+    this.previousBoards = new ArrayList<>();
+    previousBoards.add(this.board);
   }
 
   @Override
@@ -108,6 +113,7 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
               + "other balls forward without pushing one out");
     }
     else {
+      previousBoards.add(this.board);
       if (board[x][y][z] == LocationState.EMPTY) {
         board[x][y][z] = player;
       }
@@ -236,35 +242,6 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     return gameState;
   }
 
-  //OLD GET GAME STATE
-  /*
-  public String getGameState() {
-    String gameState = "";
-    gameState += "Top: \n";
-    for(int i = 0; i < 3; i++) {
-      for(int j = 0; j < 3; j++) {
-        gameState += board[j][2 - i][0].toString() + "  ";
-      }
-      gameState += "\n\n";
-    }
-    gameState += "Middle: \n";
-    for(int i = 0; i < 3; i++) {
-      for(int j = 0; j < 3; j++) {
-        gameState += board[j][2 - i][1].toString() + "  ";
-      }
-      gameState += "\n\n";
-    }
-    gameState += "Bottom: \n";
-    for(int i = 0; i < 3; i++) {
-      for(int j = 0; j < 3; j++) {
-        gameState += board[j][2 - i][2].toString() + "  ";
-      }
-      gameState += "\n\n";
-    }
-    return gameState;
-  }
-   */
-
   protected static LocationState[][][] makeBoard() {
     int size = 3;
     LocationState[][][] board = new LocationState[size][size][size];
@@ -353,6 +330,16 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
       }
     }
     return count;
+  }
+
+  public void setBoard(LocationState[][][] board) {
+    this.board = board;
+  }
+
+  protected TicTacToeModel getCopy() {
+    TicTacToeModel copy = new ThreePlayerImpl();
+    copy.setBoard(this.board);
+    return copy;
   }
 }
 

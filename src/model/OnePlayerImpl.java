@@ -89,6 +89,23 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     System.out.print("\n\n(random move)Computers move: " + x + " " + y + " " + z + " " + dir.toString() + "\n\n");
   }
 
+  // chooses move which will be in line with one other piece
+  private boolean betterRandomMove() {
+    for(int i = 0; i < 1000; i++) {
+      int x = new Random().nextInt(3);
+      int y = new Random().nextInt(3);
+      int z = new Random().nextInt(3);
+      Direction dir = Direction.randomDirection();
+
+      if(isValidMove(x,y,z,dir) && aRunContains(x,y,z,computerColor)) {
+        super.move(x,y,z,dir,computerColor);
+        System.out.print("\n\n(better random move)Computers move: " + x + " " + y + " " + z + " " + dir.toString() + "\n\n");
+        return true;
+      }
+    }
+    return false;
+  }
+
   //puts piece in opponents third spot
   private boolean dumbBlockingMove() {
     BoardLocation lastPosition;
@@ -105,23 +122,6 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
             return true;
           }
         }
-      }
-    }
-    return false;
-  }
-
-  // chooses move which will be in line with one other piece
-  private boolean betterRandomMove() {
-    for(int i = 0; i < 1000; i++) {
-      int x = new Random().nextInt(3);
-      int y = new Random().nextInt(3);
-      int z = new Random().nextInt(3);
-      Direction dir = Direction.randomDirection();
-
-      if(isValidMove(x,y,z,dir) && aRunContains(x,y,z,computerColor)) {
-        super.move(x,y,z,dir,computerColor);
-        System.out.print("\n\n(better random move)Computers move: " + x + " " + y + " " + z + " " + dir.toString() + "\n\n");
-        return true;
       }
     }
     return false;
