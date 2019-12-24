@@ -350,20 +350,19 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
 
   @Override
   public void undo() {
-    int historyLength = previousBoards.size();
-    if(historyLength > 1) {
-      this.board = previousBoards.get(historyLength-1);
-      previousBoards.remove(historyLength-1);
+    if(previousBoards.size() > 0) {
+      this.board = previousBoards.get(previousBoards.size()-1);
+      previousBoards.remove(previousBoards.size()-1);
     }
   }
 
-  public void reset() {
+  void reset() {
     this.board = previousBoards.get(0);
     this.previousBoards = new ArrayList<>();
     this.previousBoards.add(copyBoard(this.board));
   }
 
-  protected LocationState[][][] copyBoard(LocationState[][][] board) {
+  private LocationState[][][] copyBoard(LocationState[][][] board) {
     LocationState[][][] copy = new LocationState[3][3][3];
     for (int i = 0; i <= 2; i++) {
       for(int j = 0; j <= 2; j++) {

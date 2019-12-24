@@ -311,10 +311,10 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
 
   @Override
   public void undo() {
-    if(previousBoards.size() > 2) {
+    if(previousBoards.size() > 1) {
       board = previousBoards.get(previousBoards.size()-2);
       previousBoards.remove(previousBoards.size()-1);
-      previousBoards.remove(previousBoards.size()-2);
+      previousBoards.remove(previousBoards.size()-1);
     }
   }
 }
