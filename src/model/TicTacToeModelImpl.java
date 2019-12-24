@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 abstract public class TicTacToeModelImpl implements TicTacToeModel {
 
-  protected LocationState[][][] board;
+  LocationState[][][] board;
 
-  protected ArrayList<LocationState[][][]> previousBoards;
+  ArrayList<LocationState[][][]> previousBoards;
 
-  protected ArrayList<ArrayList<BoardLocation>> runs;
+  ArrayList<ArrayList<BoardLocation>> runs;
 
   public TicTacToeModelImpl() {
     // creates a list of all possible runs in the game
@@ -103,7 +103,6 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
 
     // initializes the board history
     this.previousBoards = new ArrayList<>();
-    previousBoards.add(this.board);
   }
 
   @Override
@@ -113,7 +112,8 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
               + "other balls forward without pushing one out");
     }
     else {
-      previousBoards.add(this.board);
+      //before move is made, state is saved
+      previousBoards.add(copyBoard(this.board));
       if (board[x][y][z] == LocationState.EMPTY) {
         board[x][y][z] = player;
       }
@@ -190,19 +190,25 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
         }
       }
     }
+    //////added to debug
+    printHistory();
     if(isGameOver()) {
       System.out.print("Game over! Player " + player.toString() + " wins!\n\n");
     }
   }
 
+  private void printHistory() {
+    int i = 1;
+    for(LocationState[][][] oldBoard : previousBoards) {
+      System.out.print("Board: " + i + oldBoard[0][0][0] + "\n\n");
+      i++;
+    }
+  }
+
   @Override
   public boolean isGameOver() {
-    for (ArrayList<BoardLocation> run : runs) {
-      if (locationToState(run.get(0)).equals(locationToState(run.get(1))) &&
-      locationToState(run.get(1)).equals(locationToState(run.get(2))) &&
-              !locationToState(run.get(0)).equals(LocationState.EMPTY)) {
-        return true;
-      }
+    if(hasWon(LocationState.RED) || hasWon(LocationState.WHITE) || hasWon(LocationState.BLACK)) {
+      return true;
     }
     for (int x = 0; x < 3; x++) {
       for (int y = 0; y < 3; y++) {
@@ -216,6 +222,16 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
       }
     }
     return true;
+  }
+
+  public boolean hasWon(LocationState player) {
+    for(ArrayList<BoardLocation> run : runs) {
+      if (locationToState(run.get(0)).equals(player) && locationToState(run.get(1)).equals(player)
+              && locationToState(run.get(2)).equals(player)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
@@ -332,14 +348,31 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     return count;
   }
 
-  public void setBoard(LocationState[][][] board) {
-    this.board = board;
+  @Override
+  public void undo() {
+    int historyLength = previousBoards.size();
+    if(historyLength > 1) {
+      this.board = previousBoards.get(historyLength-1);
+      previousBoards.remove(historyLength-1);
+    }
   }
 
-  protected TicTacToeModel getCopy() {
-    TicTacToeModel copy = new ThreePlayerImpl();
-    copy.setBoard(this.board);
+  public void reset() {
+    this.board = previousBoards.get(0);
+    this.previousBoards = new ArrayList<>();
+    this.previousBoards.add(copyBoard(this.board));
+  }
+
+  protected LocationState[][][] copyBoard(LocationState[][][] board) {
+    LocationState[][][] copy = new LocationState[3][3][3];
+    for (int i = 0; i <= 2; i++) {
+      for(int j = 0; j <= 2; j++) {
+        for(int k = 0; k <= 2; k++) {
+          copy[i][j][k] = board[i][j][k];
+        }
+      }
+    }
     return copy;
   }
-}
 
+}

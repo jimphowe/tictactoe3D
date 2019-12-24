@@ -24,13 +24,8 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
 
   @Override
   public boolean isGameOver() {
-    for (ArrayList<BoardLocation> run : runs) {
-      if (locationToState(run.get(0)).equals(locationToState(run.get(1))) &&
-              locationToState(run.get(1)).equals(locationToState(run.get(2))) &&
-              !locationToState(run.get(0)).equals(LocationState.EMPTY) &&
-              locationToState(run.get(0)) != LocationState.BLACK) {
-        return true;
-      }
+    if(hasWon(computerColor) || hasWon(playerColor)) {
+      return true;
     }
     for (int x = 0; x < 3; x++) {
       for (int y = 0; y < 3; y++) {
@@ -312,5 +307,14 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
       }
     }
     return false;
+  }
+
+  @Override
+  public void undo() {
+    if(previousBoards.size() > 2) {
+      board = previousBoards.get(previousBoards.size()-2);
+      previousBoards.remove(previousBoards.size()-1);
+      previousBoards.remove(previousBoards.size()-2);
+    }
   }
 }

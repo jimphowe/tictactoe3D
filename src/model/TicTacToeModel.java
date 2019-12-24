@@ -9,5 +9,5 @@ public interface TicTacToeModel {
 
   String getGameState();
 
-  void setBoard(LocationState[][][] board);
+  void undo();
 }

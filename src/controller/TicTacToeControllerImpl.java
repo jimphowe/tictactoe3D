@@ -46,6 +46,10 @@ public class TicTacToeControllerImpl implements TicTacToeController {
         tryAppend("\nGame quit!\nState of game when quit:\n\n" + model.getGameState() + "\n");
         return;
       }
+      if (val.equals("u") || val.equals("U")) {
+        model.undo();
+        tryAppend("Move undone\n" + model.getGameState() + "\n");
+      }
       else if (isValidInput(val, command.size())) {
         command.add(val);
       }
