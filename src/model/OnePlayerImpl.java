@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -84,7 +83,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getBetterRandomMove(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\n(better random move)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,computerColor);
       return true;
     }
@@ -98,7 +97,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getBetterDefendingMove(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\n(better defending move)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,computerColor);
       return true;
     }
@@ -107,12 +106,12 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     }
   }
 
-  //wins he game if possible(ties aren't accounted for)
+  //wins the game if possible(ties aren't accounted for)
   private boolean winningMove() {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getWinningMove(computerColor);
     if(move != null) {
-      System.out.print("\n\n(winning move)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,computerColor);
       return true;
     }

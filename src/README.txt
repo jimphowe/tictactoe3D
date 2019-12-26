@@ -13,6 +13,8 @@ Moves can not push another piece out of the board however.
 
 How to play:
 
+At any point, type 'q' to quit, or 'u' to undo the last move.
+
 
 A valid move is of the form [pos pos pos direction player]
 
