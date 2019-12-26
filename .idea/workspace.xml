@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9b8d55-845c-4c79-86b1-e1ff6d79e5f3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/Move.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/TesterModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tictactoe3D/model/OnePlayerImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tictactoe3D/model/OnePlayerImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tictactoe3D/model/TicTacToeModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tictactoe3D/model/TicTacToeModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tictactoe3D/model/TicTacToeModelImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tictactoe3D/model/TicTacToeModelImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tictactoe3D/model/TicTacToeModelImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tictactoe3D/model/TicTacToeModelImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/TicTacToeControllerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/TicTacToeControllerImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/OnePlayerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/OnePlayerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ThreePlayerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ThreePlayerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/TicTacToeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/TicTacToeModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/TesterModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/TesterModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/TicTacToeModelImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/TicTacToeModelImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/TwoPlayerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/TwoPlayerImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,18 +19,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/TicTacToeControllerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="353">
@@ -52,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/OnePlayerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="313" column="32" selection-start-line="313" selection-start-column="32" selection-end-line="313" selection-end-column="32" />
+            <state relative-caret-position="197">
+              <caret line="76" column="27" lean-forward="true" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -65,22 +43,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/TicTacToeModelTests.java">
+        <entry file="file://$PROJECT_DIR$/src/model/BoardLocation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="300">
+              <caret line="26" column="71" selection-start-line="26" selection-start-column="71" selection-end-line="26" selection-end-column="71" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/TicTacToeModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="353" column="24" selection-start-line="353" selection-start-column="24" selection-end-line="353" selection-end-column="24" />
+            <state relative-caret-position="766">
+              <caret line="364" column="11" selection-start-line="364" selection-start-column="11" selection-end-line="364" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -91,8 +66,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/TesterModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="900">
-              <caret line="60" column="19" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
+            <state relative-caret-position="465">
+              <caret line="31" column="2" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
+              <folding>
+                <element signature="e#3072#3073#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,6 +80,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
               <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/LocationState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -180,11 +167,11 @@
         <option value="$PROJECT_DIR$/src/model/ThreePlayerImpl.java" />
         <option value="$PROJECT_DIR$/src/model/TwoPlayerImpl.java" />
         <option value="$PROJECT_DIR$/src/model/Move.java" />
-        <option value="$PROJECT_DIR$/src/model/TesterModel.java" />
         <option value="$PROJECT_DIR$/src/model/TicTacToeModel.java" />
         <option value="$PROJECT_DIR$/src/controller/TicTacToeControllerImpl.java" />
-        <option value="$PROJECT_DIR$/src/model/OnePlayerImpl.java" />
         <option value="$PROJECT_DIR$/src/model/TicTacToeModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/model/TesterModel.java" />
+        <option value="$PROJECT_DIR$/src/model/OnePlayerImpl.java" />
       </list>
     </option>
   </component>
@@ -345,8 +332,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="17" y="23" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2360515" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2360515" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -355,7 +343,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.76305735" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46878982" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -380,13 +368,6 @@
     <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/BoardLocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="26" column="71" selection-start-line="26" selection-start-column="71" selection-end-line="26" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/README.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -405,13 +386,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/LocationState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -452,13 +426,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/Move.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/TwoPlayerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -480,27 +447,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/TesterModel.java">
+    <entry file="file://$PROJECT_DIR$/src/model/Move.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="60" column="19" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
+        <state relative-caret-position="180">
+          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/OnePlayerImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/model/BoardLocation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="313" column="32" selection-start-line="313" selection-start-column="32" selection-end-line="313" selection-end-column="32" />
+        <state relative-caret-position="300">
+          <caret line="26" column="71" selection-start-line="26" selection-start-column="71" selection-end-line="26" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/LocationState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/TicTacToeModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="766">
+          <caret line="364" column="11" selection-start-line="364" selection-start-column="11" selection-end-line="364" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/TicTacToeModelImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/model/TesterModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="353" column="24" selection-start-line="353" selection-start-column="24" selection-end-line="353" selection-end-column="24" />
+        <state relative-caret-position="465">
+          <caret line="31" column="2" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
+          <folding>
+            <element signature="e#3072#3073#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/OnePlayerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="76" column="27" lean-forward="true" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

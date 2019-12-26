@@ -190,8 +190,6 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
         }
       }
     }
-    //////added to debug
-    printHistory();
     if(isGameOver()) {
       System.out.print("Game over! Player " + player.toString() + " wins!\n\n");
     }
@@ -357,12 +355,14 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
   }
 
   void reset() {
-    this.board = previousBoards.get(0);
-    this.previousBoards = new ArrayList<>();
-    this.previousBoards.add(copyBoard(this.board));
+    if(previousBoards.size() > 0) {
+      this.board = previousBoards.get(0);
+      this.previousBoards = new ArrayList<>();
+      this.previousBoards.add(copyBoard(this.board));
+    }
   }
 
-  private LocationState[][][] copyBoard(LocationState[][][] board) {
+  protected LocationState[][][] copyBoard(LocationState[][][] board) {
     LocationState[][][] copy = new LocationState[3][3][3];
     for (int i = 0; i <= 2; i++) {
       for(int j = 0; j <= 2; j++) {
