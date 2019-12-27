@@ -50,7 +50,7 @@ public class Game {
   }
 
   private static void printRules() {
-    System.out.println("The rules are the same as normal tic tac toe\n1, 2, or 3 players?");
+    System.out.println("Make sure you have read the README before starting\n1, 2, or 3 players?");
   }
 
 }

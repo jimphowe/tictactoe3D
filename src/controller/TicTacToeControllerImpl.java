@@ -1,8 +1,11 @@
 package controller;
 
+import model.OnePlayerImpl;
+import model.ThreePlayerImpl;
 import model.TicTacToeModel;
 import model.LocationState;
 import model.Direction;
+import model.TwoPlayerImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +42,8 @@ public class TicTacToeControllerImpl implements TicTacToeController {
     }
     Scanner scan = new Scanner(this.rd);
     ArrayList<String> command = new ArrayList<>();
-    tryAppend(model.getGameState());
+    tryAppend(model.getGameState() + "\nRed players turn:\n");
+    int turnCounter = 0;
     while (scan.hasNext()) {
       String val = scan.next();
       if (val.equals("q") || val.equals("Q")) {
@@ -56,12 +60,44 @@ public class TicTacToeControllerImpl implements TicTacToeController {
       else {
         tryAppend("Input \"" + val + "\" not recognized, please re-enter it\n");
       }
-      if (command.size() == 5) {
+      if (command.size() == 4) {
         try {
-          model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
-                  Integer.parseInt(command.get(2)), handleDirection(command.get(3)), handleState(command.get(4)));
+          if(model instanceof OnePlayerImpl) {
+            model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
+                    Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.RED);
+            tryAppend(model.getGameState() + "\n\nRed players turn:\n");
+          }
+          else if(model instanceof TwoPlayerImpl) {
+            if(turnCounter % 2 == 0) {
+              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
+                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.RED);
+              tryAppend(model.getGameState() + "\nWhite players turn:\n");
+            }
+            else if(turnCounter % 2 == 1) {
+              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
+                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.WHITE);
+              tryAppend(model.getGameState() + "\nRed players turn:\n");
+            }
+          }
+          else if(model instanceof ThreePlayerImpl) {
+            if(turnCounter % 3 == 0) {
+              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
+                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.RED);
+              tryAppend(model.getGameState() + "\nWhite players turn:\n");
+            }
+            else if(turnCounter % 3 == 1) {
+              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
+                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.WHITE);
+              tryAppend(model.getGameState() + "\nBlack players turn:\n");
+            }
+            else if(turnCounter % 3 == 2) {
+              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
+                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.BLACK);
+              tryAppend(model.getGameState() + "\nRed players turn:\n");
+            }
+          }
+          turnCounter++;
           command.clear();
-          tryAppend(model.getGameState() + "\n");
         } catch (IllegalArgumentException ex) {
           command.clear();
           tryAppend("This move is impossible, or would push a piece out of the board. Play again.\n");
@@ -91,9 +127,6 @@ public class TicTacToeControllerImpl implements TicTacToeController {
     else if(position == 3) {
       return validDirection(val);
     }
-    else if(position == 4) {
-      return validPlayer(val);
-    }
     else {
       throw new IllegalStateException("something weird happened");
     }
@@ -117,17 +150,6 @@ public class TicTacToeControllerImpl implements TicTacToeController {
     }
     else {
       System.out.print("Must enter a valid direction (UP,DOWN,LEFT,RIGHT,FRONT,BACK)");
-      return false;
-    }
-  }
-
-  private boolean validPlayer(String val) {
-    List<String> valid = new ArrayList<>(Arrays.asList("RED","BLACK","WHITE"));
-    if(valid.contains(val.toUpperCase())) {
-      return true;
-    }
-    else {
-      System.out.print(("Must enter a valid player (RED,WHITE,BLACK)"));
       return false;
     }
   }
