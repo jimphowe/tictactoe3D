@@ -25,7 +25,7 @@ First select the mode (1, 2, or 3 players). Play then cycles between the players
 wins, or no more moves are possible.
 
 
-A valid move is of the form [pos pos pos direction player]
+A valid move is of the form [pos pos pos direction]
 
 Where pos is one of:
     0
@@ -39,11 +39,6 @@ Direction is one of(any case):
     RIGHT
     FRONT
     BACK
-
-And player is one of(any case):
-    RED
-    WHITE
-    BLACK
 
 On a given players turn, type in all five of these parameters in the correct order, then hit enter
 to submit the move. A move must also be possible. You can't choose a position on the bottom of the

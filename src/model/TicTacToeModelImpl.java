@@ -11,7 +11,7 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
 
   ArrayList<ArrayList<BoardLocation>> runs;
 
-  public TicTacToeModelImpl() {
+  TicTacToeModelImpl() {
     // creates a list of all possible runs in the game
 
     //front top left
@@ -222,7 +222,7 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     return true;
   }
 
-  public boolean hasWon(LocationState player) {
+  boolean hasWon(LocationState player) {
     for(ArrayList<BoardLocation> run : runs) {
       if (locationToState(run.get(0)).equals(player) && locationToState(run.get(1)).equals(player)
               && locationToState(run.get(2)).equals(player)) {
@@ -256,7 +256,7 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     return gameState;
   }
 
-  protected static LocationState[][][] makeBoard() {
+  private static LocationState[][][] makeBoard() {
     int size = 3;
     LocationState[][][] board = new LocationState[size][size][size];
     for (int i = 0; i < size; i++) {
@@ -269,11 +269,11 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     return board;
   }
 
-  protected static boolean positionOutOfBounds(int x, int y, int z) {
+  private static boolean positionOutOfBounds(int x, int y, int z) {
     return !(x >= 0 && x <= 2 && y >= 0 && y <= 2 && z >= 0 && z <= 2);
   }
 
-  protected boolean isValidMove(int x, int y, int z, Direction direction) {
+  boolean isValidMove(int x, int y, int z, Direction direction) {
     switch (direction) {
       case UP:
         if (z == 2) {
@@ -328,11 +328,11 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     }
   }
 
-  protected LocationState locationToState(BoardLocation location) {
+  LocationState locationToState(BoardLocation location) {
     return board[location.getX()][location.getY()][location.getZ()];
   }
 
-  protected int countColor(LocationState color) {
+  int countColor(LocationState color) {
     int count = 0;
     for(int i = 0; i < 3; i++) {
       for(int j = 0; j < 3; j++) {
@@ -362,13 +362,11 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     }
   }
 
-  protected LocationState[][][] copyBoard(LocationState[][][] board) {
+  LocationState[][][] copyBoard(LocationState[][][] board) {
     LocationState[][][] copy = new LocationState[3][3][3];
     for (int i = 0; i <= 2; i++) {
       for(int j = 0; j <= 2; j++) {
-        for(int k = 0; k <= 2; k++) {
-          copy[i][j][k] = board[i][j][k];
-        }
+        System.arraycopy(board[i][j], 0, copy[i][j], 0, 3);
       }
     }
     return copy;
