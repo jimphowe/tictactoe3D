@@ -46,11 +46,11 @@ public class TicTacToeControllerImpl implements TicTacToeController {
     int turnCounter = 0;
     while (scan.hasNext()) {
       String val = scan.next();
-      if (val.equals("q") || val.equals("Q")) {
+      if (val.toUpperCase().equals("Q")) {
         tryAppend("\nGame quit!\nState of game when quit:\n\n" + model.getGameState() + "\n");
         return;
       }
-      if (val.equals("u") || val.equals("U")) {
+      if (val.toUpperCase().equals("X")) {
         model.undo();
         tryAppend("Move undone\n" + model.getGameState() + "\n");
       }
@@ -144,7 +144,7 @@ public class TicTacToeControllerImpl implements TicTacToeController {
   }
 
   private boolean validDirection(String val) {
-    List<String> valid = new ArrayList<>(Arrays.asList("UP","DOWN","LEFT","RIGHT","FRONT","BACK"));
+    List<String> valid = new ArrayList<>(Arrays.asList("UP","U","DOWN","D","LEFT","L","RIGHT","R","FRONT","F","BACK","B"));
     if(valid.contains(val.toUpperCase())) {
       return true;
     }
@@ -157,33 +157,25 @@ public class TicTacToeControllerImpl implements TicTacToeController {
   private Direction handleDirection(String dir) {
     switch (dir.toUpperCase()) {
       case "UP":
+      case "U":
         return Direction.UP;
       case "DOWN":
+      case "D":
         return Direction.DOWN;
       case "LEFT":
+      case "L":
         return Direction.LEFT;
       case "RIGHT":
+      case "R":
         return Direction.RIGHT;
       case "FRONT":
+      case "F":
         return Direction.FRONT;
       case "BACK":
+      case "B":
         return Direction.BACK;
       default:
         System.out.println("Direction invalid");
-        return null;
-    }
-  }
-
-  private LocationState handleState(String state) {
-    switch (state.toUpperCase()) {
-      case "RED":
-        return LocationState.RED;
-      case "BLACK":
-        return LocationState.BLACK;
-      case "WHITE":
-        return LocationState.WHITE;
-      default:
-        System.out.println("Invalid player");
         return null;
     }
   }

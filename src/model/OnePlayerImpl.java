@@ -61,20 +61,11 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
 
   //picks random spot and direction (Computer is always white, you are always red)
   private void computerMove() {
-    //if can win now, do
+    //if can win now, do, if not, continue
     if(!winningMove()) {
-      TesterModel tester = new TesterModel(this.board);
-      Move move = tester.getWinningMove(playerColor);
-      //if the player has a winning move
-      if(move != null) {
         if(!betterDefendingMove()) {
           betterRandomMove();
         }
-      }
-      //the player doesn't have a winning move, create the most 2 in a rows for ourself
-      else {
-        betterRandomMove();
-      }
     }
   }
 
@@ -83,8 +74,8 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getBetterRandomMove(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
-      super.move(move.x,move.y,move.z,move.dir,computerColor);
+      System.out.print("\n\n(ran)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }
     else {
@@ -97,8 +88,8 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getBetterDefendingMove(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
-      super.move(move.x,move.y,move.z,move.dir,computerColor);
+      System.out.print("\n\n(def)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }
     else {
@@ -111,8 +102,8 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getWinningMove(computerColor);
     if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
-      super.move(move.x,move.y,move.z,move.dir,computerColor);
+      System.out.print("\n\n(win)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }
     else {

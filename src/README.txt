@@ -19,7 +19,7 @@ placing a piece is the selected spot is empty.
 How to play:
 
 
-At any point, type 'q' to quit, or 'u' to undo the last move.
+At any point, type 'q' to quit, or 'x' to undo the last move.
 
 First select the mode (1, 2, or 3 players). Play then cycles between the players until one player
 wins, or no more moves are possible.
@@ -33,12 +33,12 @@ Where pos is one of:
     2
 
 Direction is one of(any case):
-    UP
-    DOWN
-    LEFT
-    RIGHT
-    FRONT
-    BACK
+    UP / U
+    DOWN / D
+    LEFT / L
+    RIGHT / R
+    FRONT / F
+    BACK / B
 
 On a given players turn, type in all five of these parameters in the correct order, then hit enter
 to submit the move. A move must also be possible. You can't choose a position on the bottom of the

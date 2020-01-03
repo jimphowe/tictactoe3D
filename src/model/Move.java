@@ -3,7 +3,7 @@ package model;
 class Move {
   int x,y,z;
   Direction dir;
-  private LocationState player;
+  LocationState player;
 
   Move(int x, int y, int z, Direction dir, LocationState player) {
     this.x = x;

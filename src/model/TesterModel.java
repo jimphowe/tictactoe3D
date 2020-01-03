@@ -70,7 +70,7 @@ public class TesterModel extends ThreePlayerImpl {
   //own two in a rows
   Move getBetterDefendingMove(LocationState player1, LocationState player2) {
     ArrayList<Move> potentialMoves = new ArrayList<>();
-    int maxDoubles = 0;
+    int maxDoubles = 1;
     for(int i = 0; i <= 2; i++) {
       for(int j = 0; j <= 2; j++) {
         for(int k = 0; k <= 2; k++) {
