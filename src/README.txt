@@ -1,4 +1,4 @@
-Welcome to TicTacToe!
+Welcome to a text based TicTacToe! In 3 dimensions!
 
 
 The rules are as follows:

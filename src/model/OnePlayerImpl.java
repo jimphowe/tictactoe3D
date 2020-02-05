@@ -63,9 +63,11 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
   private void computerMove() {
     //if can win now, do, if not, continue
     if(!winningMove()) {
-        if(!betterDefendingMove()) {
+      if(!winInTwo()) {
+        if (!betterDefendingMove()) {
           betterRandomMove();
         }
+      }
     }
   }
 
@@ -100,7 +102,12 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
   private boolean winInTwo() {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getWinInTwo(computerColor,playerColor);
-    return true;
+    if(move != null) {
+      System.out.print("\n\n(win2)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      super.move(move.x,move.y,move.z,move.dir,move.player);
+      return true;
+    }
+    return false;
   }
 
   //wins the game if possible(ties aren't accounted for)

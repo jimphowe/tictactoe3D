@@ -12,6 +12,22 @@ public class TesterModel extends ThreePlayerImpl {
   private Random rand = new Random();
 
   Move getWinInTwo(LocationState player1, LocationState player2) {
+    for(Move move : getPossibleMoves(player1)) {
+      move(move.x,move.y,move.z,move.dir,move.player);
+      if(getWinningMove(player2) != null) {
+        boolean moveWinsInTwo = true;
+        for (Move secondMove : getPossibleMoves(player2)) {
+          move(secondMove.x, secondMove.y, secondMove.z, secondMove.dir, secondMove.player);
+          if (getWinningMove(player1) == null) {
+            moveWinsInTwo = false;
+          }
+        }
+        if (moveWinsInTwo) {
+          return move;
+        }
+      }
+      reset();
+    }
     return null;
   }
 

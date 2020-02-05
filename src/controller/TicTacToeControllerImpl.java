@@ -59,6 +59,9 @@ public class TicTacToeControllerImpl implements TicTacToeController {
       }
       else {
         tryAppend("Input \"" + val + "\" not recognized, please re-enter it\n");
+        while(scan.hasNext()) {
+          scan.next();
+        }
       }
       if (command.size() == 4) {
         try {
