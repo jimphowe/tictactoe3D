@@ -19,7 +19,7 @@ placing a piece is the selected spot is empty.
 How to play:
 
 
-At any point, type 'q' to quit, or 'x' to undo the last move.
+At any point, type 'q' to quit, or 'u' to undo the last move.
 
 First select the mode (1, 2, or 3 players). Play then cycles between the players until one player
 wins, or no more moves are possible.
@@ -33,7 +33,7 @@ Where pos is one of:
     2
 
 Direction is one of(any case):
-    UP / U
+    UP
     DOWN / D
     LEFT / L
     RIGHT / R

@@ -11,23 +11,18 @@ public class TesterModel extends ThreePlayerImpl {
 
   private Random rand = new Random();
 
+  Move getWinInTwo(LocationState player1, LocationState player2) {
+    return null;
+  }
 
   //returns a move if player can win, o/w returns null
   Move getWinningMove(LocationState player) {
-    for(int i = 0; i <= 2; i++) {
-      for(int j = 0; j <= 2; j++) {
-        for(int k = 0; k <= 2; k++) {
-          for(Direction dir : Direction.values()) {
-            if (isValidMove(i, j, k, dir)) {
-              move(i, j, k, dir, player);
-              if (hasWon(player)) {
-                return new Move(i, j, k, dir, player);
-              } else {
-                reset();
-              }
-            }
-          }
-        }
+    for(Move move : getPossibleMoves(player)) {
+      move(move.x,move.y,move.z,move.dir,move.player);
+      if (hasWon(player)) {
+        return move;
+      } else {
+        reset();
       }
     }
     return null;
@@ -37,26 +32,18 @@ public class TesterModel extends ThreePlayerImpl {
     ArrayList<Move> goodPotentialMoves = new ArrayList<>();
     ArrayList<Move> allPotentialMoves = new ArrayList<>();
     int maxDoubles = 0;
-    for(int i = 0; i <= 2; i++) {
-      for(int j = 0; j <= 2; j++) {
-        for(int k = 0; k <= 2; k++) {
-          for(Direction dir : Direction.values()) {
-            if(isValidMove(i,j,k,dir)) {
-              allPotentialMoves.add(new Move(i,j,k,dir,player1));
+    for(Move move : getPossibleMoves(player1)) {
+              allPotentialMoves.add(move);
               LocationState[][][] oldBoard = copyBoard(this.board);
-              move(i, j, k, dir, player1);
+              move(move.x, move.y, move.z, move.dir, move.player);
               if (getNumDoubles(player1) == maxDoubles && getNumDoubles(player2) == 0) {
-                goodPotentialMoves.add(new Move(i, j, k, dir, player1));
+                goodPotentialMoves.add(move);
               }
               else if (getNumDoubles(player1) > maxDoubles && getNumDoubles(player2) == 0) {
                 goodPotentialMoves.clear();
-                goodPotentialMoves.add(new Move(i,j,k,dir,player1));
+                goodPotentialMoves.add(move);
               }
               this.board = oldBoard;
-            }
-          }
-        }
-      }
     }
     if(goodPotentialMoves.size() != 0) {
       return goodPotentialMoves.get(rand.nextInt(goodPotentialMoves.size()));
@@ -71,26 +58,17 @@ public class TesterModel extends ThreePlayerImpl {
   Move getBetterDefendingMove(LocationState player1, LocationState player2) {
     ArrayList<Move> potentialMoves = new ArrayList<>();
     int maxDoubles = 1;
-    for(int i = 0; i <= 2; i++) {
-      for(int j = 0; j <= 2; j++) {
-        for(int k = 0; k <= 2; k++) {
-          for(Direction dir : Direction.values()) {
-            if(isValidMove(i,j,k,dir)) {
+            for(Move move : getPossibleMoves(player1)) {
               LocationState[][][] oldBoard = copyBoard(this.board);
-              move(i, j, k, dir, player1);
+              move(move.x, move.y, move.z, move.dir, move.player);
               if (getNumDoubles(player1) == maxDoubles && getNumDoubles(player2) == 0) {
-                potentialMoves.add(new Move(i, j, k, dir, player1));
-              }
-              else if (getNumDoubles(player1) > maxDoubles && getNumDoubles(player2) == 0) {
+                potentialMoves.add(move);
+              } else if (getNumDoubles(player1) > maxDoubles && getNumDoubles(player2) == 0) {
                 potentialMoves.clear();
-                potentialMoves.add(new Move(i,j,k,dir,player1));
+                potentialMoves.add(move);
               }
               this.board = oldBoard;
             }
-          }
-        }
-      }
-    }
     if(potentialMoves.size() != 0) {
       return potentialMoves.get(rand.nextInt(potentialMoves.size()));
     }
@@ -109,6 +87,24 @@ public class TesterModel extends ThreePlayerImpl {
       }
     }
     return doubles;
+  }
+
+  //get a list of all possible moves for a given player
+  private ArrayList<Move> getPossibleMoves(LocationState player) {
+    ArrayList<Move> possibleMoves = new ArrayList<>();
+    for(int i = 0; i < 3; i++) {
+      for(int j = 0; j < 3; j++) {
+        for(int k = 0; k < 3; k++) {
+          for(Direction dir : Direction.values()) {
+            if(isValidMove(i,j,k,dir)) {
+              Move toAdd = new Move(i,j,k,dir,player);
+              possibleMoves.add(toAdd);
+            }
+          }
+        }
+      }
+    }
+    return possibleMoves;
   }
 
   @Override

@@ -23,10 +23,10 @@ public class Game {
       case "1":
         System.out.print("Would you like to go first or second?\n");
         String turn = scan.next();
-        if(turn.toLowerCase().equals("first")) {
+        if(turn.toUpperCase().equals("FIRST") || turn.toUpperCase().equals("F")) {
           model = new OnePlayerImpl(false);
         }
-        else if(turn.toLowerCase().equals("second")) {
+        else if(turn.toUpperCase().equals("SECOND") || turn.toUpperCase().equals("S")) {
           model = new OnePlayerImpl(true);
         }
         else {

@@ -50,7 +50,7 @@ public class TicTacToeControllerImpl implements TicTacToeController {
         tryAppend("\nGame quit!\nState of game when quit:\n\n" + model.getGameState() + "\n");
         return;
       }
-      if (val.toUpperCase().equals("X")) {
+      if (val.toUpperCase().equals("U")) {
         model.undo();
         tryAppend("Move undone\n" + model.getGameState() + "\n");
       }
@@ -157,7 +157,7 @@ public class TicTacToeControllerImpl implements TicTacToeController {
   private Direction handleDirection(String dir) {
     switch (dir.toUpperCase()) {
       case "UP":
-      case "U":
+      //case "U":
         return Direction.UP;
       case "DOWN":
       case "D":

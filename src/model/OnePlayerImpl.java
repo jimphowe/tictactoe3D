@@ -97,6 +97,12 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     }
   }
 
+  private boolean winInTwo() {
+    TesterModel tester = new TesterModel(this.board);
+    Move move = tester.getWinInTwo(computerColor,playerColor);
+    return true;
+  }
+
   //wins the game if possible(ties aren't accounted for)
   private boolean winningMove() {
     TesterModel tester = new TesterModel(this.board);

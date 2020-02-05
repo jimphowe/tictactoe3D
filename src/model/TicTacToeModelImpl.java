@@ -245,7 +245,7 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     gameState += "|         |                     |\n";
     gameState += "|       " + board[0][1][1].toString() + "  " + board[1][1][1].toString() + "  " + board[2][1][1].toString() + "     |\n";
     gameState += "|         |                     |\n";
-    gameState += "|         |  " + board[0][0][1].toString() + "  " + board[1][0][1].toString() + "  " + board[2][0][1].toString() + "|\n";
+    gameState += "|         | " + board[0][0][1].toString() + "  " + board[1][0][1].toString() + "  " + board[2][0][1].toString() + " |\n";
     gameState += "|         |                     |\n";
     gameState += " ∖ " + board[0][2][2].toString() + "  " + board[1][2][2].toString() + "  " + board[2][2][2].toString() + "          |\n";
     gameState += "   ∖      |                     |\n";
