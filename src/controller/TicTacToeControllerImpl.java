@@ -52,16 +52,15 @@ public class TicTacToeControllerImpl implements TicTacToeController {
       }
       if (val.toUpperCase().equals("U")) {
         model.undo();
+        turnCounter--;
         tryAppend("Move undone\n" + model.getGameState() + "\n");
       }
       else if (isValidInput(val, command.size())) {
         command.add(val);
       }
       else {
-        tryAppend("Input \"" + val + "\" not recognized, please re-enter it\n");
-        while(scan.hasNext()) {
-          scan.next();
-        }
+        tryAppend("Input \"" + val + "\" not recognized, please re-enter the entire command\n");
+        command = new ArrayList<>();
       }
       if (command.size() == 4) {
         try {
@@ -141,7 +140,7 @@ public class TicTacToeControllerImpl implements TicTacToeController {
       return true;
     }
     else {
-      System.out.print("Must enter a valid position (0,1,2)");
+      System.out.print("Must enter a valid position (0,1,2). ");
       return false;
     }
   }
@@ -152,7 +151,7 @@ public class TicTacToeControllerImpl implements TicTacToeController {
       return true;
     }
     else {
-      System.out.print("Must enter a valid direction (UP,DOWN,LEFT,RIGHT,FRONT,BACK)");
+      System.out.print("Must enter a valid direction (UP,DOWN,LEFT,RIGHT,FRONT,BACK). ");
       return false;
     }
   }

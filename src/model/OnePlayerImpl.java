@@ -63,25 +63,19 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
   private void computerMove() {
     //if can win now, do, if not, continue
     if(!winningMove()) {
-      if(!winInTwo()) {
-        if (!betterDefendingMove()) {
-          betterRandomMove();
-        }
+      if (!betterDefendingMove()) {
+        betterRandomMove();
       }
     }
   }
 
   // chooses move which maximises 2 in a rows
-  private boolean betterRandomMove() {
+  private void betterRandomMove() {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getBetterRandomMove(computerColor,playerColor);
     if(move != null) {
       System.out.print("\n\n(ran)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
-      return true;
-    }
-    else {
-      return false;
     }
   }
 
@@ -91,6 +85,19 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     Move move = tester.getBetterDefendingMove(computerColor,playerColor);
     if(move != null) {
       System.out.print("\n\n(def)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      super.move(move.x,move.y,move.z,move.dir,move.player);
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  private boolean moveWhereTheyDontWinInTwo() {
+    TesterModel tester = new TesterModel(this.board);
+    Move move = tester.getMoveWhereTheyDontWinInTwo(computerColor,playerColor);
+    if(move != null) {
+      System.out.print("\n\n(theydontwinin2)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }

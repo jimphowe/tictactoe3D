@@ -13,14 +13,18 @@ public class TesterModel extends ThreePlayerImpl {
 
   Move getWinInTwo(LocationState player1, LocationState player2) {
     for(Move move : getPossibleMoves(player1)) {
+      System.out.println("Test move in getWinInTwoOuter " + player1 + " " + move.x + move.y + move.z + move.dir);
       move(move.x,move.y,move.z,move.dir,move.player);
       if(getWinningMove(player2) != null) {
         boolean moveWinsInTwo = true;
         for (Move secondMove : getPossibleMoves(player2)) {
+          System.out.println("Test move in getWinInTwoInner " + player2 + " " + secondMove.x + secondMove.y + secondMove.x + secondMove.dir);
           move(secondMove.x, secondMove.y, secondMove.z, secondMove.dir, secondMove.player);
           if (getWinningMove(player1) == null) {
             moveWinsInTwo = false;
           }
+          this.board = this.previousBoards.get(this.previousBoards.size() - 1);
+          this.previousBoards.remove(this.previousBoards.size()-1);
         }
         if (moveWinsInTwo) {
           return move;
@@ -31,9 +35,22 @@ public class TesterModel extends ThreePlayerImpl {
     return null;
   }
 
+  Move getMoveWhereTheyDontWinInTwo(LocationState player1, LocationState player2) {
+    for(Move move : getPossibleMoves(player1)) {
+      System.out.println("Test move in getWhereDontWinInTwo " + player1 + " " + move.x + move.y + move.x + move.dir);
+      move(move.x,move.y,move.z,move.dir,move.player);
+      if(getWinInTwo(player2,player1) != null && getWinningMove(player2) != null) {
+        return move;
+      }
+      reset();
+    }
+    return null;
+  }
+
   //returns a move if player can win, o/w returns null
   Move getWinningMove(LocationState player) {
     for(Move move : getPossibleMoves(player)) {
+      System.out.println("Test move in getWinningmove");
       move(move.x,move.y,move.z,move.dir,move.player);
       if (hasWon(player)) {
         return move;
@@ -50,7 +67,7 @@ public class TesterModel extends ThreePlayerImpl {
     int maxDoubles = 0;
     for(Move move : getPossibleMoves(player1)) {
               allPotentialMoves.add(move);
-              LocationState[][][] oldBoard = copyBoard(this.board);
+              System.out.println("Test move in getBetterRandomMove");
               move(move.x, move.y, move.z, move.dir, move.player);
               if (getNumDoubles(player1) == maxDoubles && getNumDoubles(player2) == 0) {
                 goodPotentialMoves.add(move);
@@ -59,7 +76,7 @@ public class TesterModel extends ThreePlayerImpl {
                 goodPotentialMoves.clear();
                 goodPotentialMoves.add(move);
               }
-              this.board = oldBoard;
+              reset();
     }
     if(goodPotentialMoves.size() != 0) {
       return goodPotentialMoves.get(rand.nextInt(goodPotentialMoves.size()));
@@ -75,7 +92,7 @@ public class TesterModel extends ThreePlayerImpl {
     ArrayList<Move> potentialMoves = new ArrayList<>();
     int maxDoubles = 1;
             for(Move move : getPossibleMoves(player1)) {
-              LocationState[][][] oldBoard = copyBoard(this.board);
+              System.out.println("Test move in getBetterDefendingMove");
               move(move.x, move.y, move.z, move.dir, move.player);
               if (getNumDoubles(player1) == maxDoubles && getNumDoubles(player2) == 0) {
                 potentialMoves.add(move);
@@ -83,7 +100,7 @@ public class TesterModel extends ThreePlayerImpl {
                 potentialMoves.clear();
                 potentialMoves.add(move);
               }
-              this.board = oldBoard;
+              reset();
             }
     if(potentialMoves.size() != 0) {
       return potentialMoves.get(rand.nextInt(potentialMoves.size()));
@@ -112,7 +129,7 @@ public class TesterModel extends ThreePlayerImpl {
       for(int j = 0; j < 3; j++) {
         for(int k = 0; k < 3; k++) {
           for(Direction dir : Direction.values()) {
-            if(isValidMove(i,j,k,dir)) {
+            if(this.isValidMove(i,j,k,dir)) {
               Move toAdd = new Move(i,j,k,dir,player);
               possibleMoves.add(toAdd);
             }

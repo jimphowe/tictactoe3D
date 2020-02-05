@@ -195,6 +195,7 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     }
   }
 
+  //for debugging
   private void printHistory() {
     int i = 1;
     for(LocationState[][][] oldBoard : previousBoards) {
