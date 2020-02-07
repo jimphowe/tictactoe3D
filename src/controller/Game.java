@@ -6,43 +6,65 @@ import model.TicTacToeModel;
 import model.TwoPlayerImpl;
 
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
 
   public static void main( String[] args ) {
-    printWelcome();
-    printRules();
+    while(true) {
+      printWelcome();
+      printRules();
 
-    TicTacToeController controller = new TicTacToeControllerImpl(
-            new InputStreamReader(System.in), System.out);
-    TicTacToeModel model;
-    Scanner scan = new Scanner(System.in);
-    String val = scan.next();
-    switch(val)  {
-      case "1":
-        System.out.print("Would you like to go first or second?\n");
-        String turn = scan.next();
-        if(turn.toUpperCase().equals("FIRST") || turn.toUpperCase().equals("F")) {
-          model = new OnePlayerImpl(false);
-        }
-        else if(turn.toUpperCase().equals("SECOND") || turn.toUpperCase().equals("S")) {
-          model = new OnePlayerImpl(true);
-        }
-        else {
-          throw new IllegalStateException();
-        }
-        break;
-      case "2":
-        model = new TwoPlayerImpl();
-        break;
-      case "3":
-        model = new ThreePlayerImpl();
-        break;
-      default:
-        throw new IllegalArgumentException("not a valid command");
+      TicTacToeController controller = new TicTacToeControllerImpl(
+              new InputStreamReader(System.in), System.out);
+      TicTacToeModel model;
+      Scanner scan = new Scanner(System.in);
+      String val = scan.next();
+      ArrayList<String> playersOptions = new ArrayList<>(Arrays.asList("1","2","3"));
+      while(!playersOptions.contains(val)) {
+        System.out.print("Please enter a valid choice (1, 2, or 3)\n");
+        val = scan.next();
+      }
+      switch (val) {
+        case "1":
+          System.out.print("Would you like to go first or second?\n");
+          String turn = scan.next();
+          ArrayList<String> turnOptions = new ArrayList<>(Arrays.asList("F","FIRST","S","SECOND"));
+          while(!turnOptions.contains(turn.toUpperCase())) {
+            System.out.print("Please enter a valid choice (first or second)\n");
+            turn = scan.next();
+          }
+          if (turn.toUpperCase().equals("FIRST") || turn.toUpperCase().equals("F")) {
+            model = new OnePlayerImpl(false);
+          } else if (turn.toUpperCase().equals("SECOND") || turn.toUpperCase().equals("S")) {
+            model = new OnePlayerImpl(true);
+          } else {
+            throw new IllegalStateException();
+          }
+          break;
+        case "2":
+          model = new TwoPlayerImpl();
+          break;
+        case "3":
+          model = new ThreePlayerImpl();
+          break;
+        default:
+          throw new IllegalArgumentException("not a valid command");
+      }
+      controller.playGame(model);
+      System.out.print("Would you like to play again? (y/n)\n");
+      String keepPlaying = scan.next();
+      ArrayList<String> playAgainOptions = new ArrayList<>(Arrays.asList("Y","YES","N","NO"));
+      while (!playAgainOptions.contains(keepPlaying.toUpperCase())) {
+        System.out.print("Please enter a valid choice (y or n)\n");
+        keepPlaying = scan.next();
+      }
+      if(keepPlaying.toUpperCase().equals("N")) {
+        return;
+      }
     }
-    controller.playGame(model);
   }
 
   private static void printWelcome() {

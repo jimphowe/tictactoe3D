@@ -33,16 +33,18 @@ public class TesterModel extends ThreePlayerImpl {
           if (getWinningMove(player1) == null) {
             moveWinsInTwo = false;
           }
-          this.board = this.previousBoards.get(this.previousBoards.size() - 1);
-          this.previousBoards.remove(this.previousBoards.size()-1);
-          //reset();
-          //move(move.x,move.y,move.z,move.dir,move.player);
+          //this.board = this.previousBoards.get(this.previousBoards.size() - 1);
+          //this.previousBoards.remove(this.previousBoards.size()-1);
+          reset();
+          move(move.x,move.y,move.z,move.dir,move.player);
         }
         //if still true, we won next move no matter what, so is was winintwo
         if (moveWinsInTwo) {
           return move;
         }
       }
+      //this.board = this.previousBoards.get(this.previousBoards.size() - 1);
+      //this.previousBoards.remove(this.previousBoards.size()-1);
       reset();
     }
     return null;
@@ -54,8 +56,8 @@ public class TesterModel extends ThreePlayerImpl {
       if(getWinInTwo(player2,player1) != null && getWinningMove(player2) != null) {
         return move;
       }
-      this.board = this.previousBoards.get(this.previousBoards.size() - 1);
-      this.previousBoards.remove(this.previousBoards.size()-1);
+
+      reset();
     }
     return null;
   }
@@ -80,6 +82,7 @@ public class TesterModel extends ThreePlayerImpl {
     int maxDoubles = 0;
     for(Move move : getPossibleMoves(player1)) {
               allPotentialMoves.add(move);
+              //System.out.println("Test move in getBetterRandomMove");
               move(move.x, move.y, move.z, move.dir, move.player);
               if (getNumDoubles(player1) == maxDoubles && getNumDoubles(player2) == 0) {
                 goodPotentialMoves.add(move);
@@ -105,6 +108,7 @@ public class TesterModel extends ThreePlayerImpl {
     ArrayList<Move> potentialMoves = new ArrayList<>();
     int maxDoubles = 1;
             for(Move move : getPossibleMoves(player1)) {
+              //System.out.println("Test move in getBetterDefendingMove");
               move(move.x, move.y, move.z, move.dir, move.player);
               if (getNumDoubles(player1) == maxDoubles && getNumDoubles(player2) == 0) {
                 potentialMoves.add(move);

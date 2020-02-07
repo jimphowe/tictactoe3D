@@ -78,7 +78,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getBetterRandomMove(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\n(ran)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
     }
   }
@@ -88,7 +88,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getBetterDefendingMove(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\n(def)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }
@@ -114,7 +114,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getWinInTwo(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\n(win2)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }
@@ -126,7 +126,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getWinningMove(computerColor);
     if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\n(win)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }
