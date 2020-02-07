@@ -109,7 +109,7 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
   public void move(int x, int y, int z, Direction direction, LocationState player) throws IllegalArgumentException {
     if (!isValidMove(x, y, z, direction)) {
       throw new IllegalArgumentException("The spot chosen must either be empty or be able to push "
-              + "other balls forward without pushing one out");
+              + "other balls forward without pushing one out\n" + getGameState() + x + " " + y + " " + z + " " + direction);
     }
     else {
       //before move is made, state is saved
