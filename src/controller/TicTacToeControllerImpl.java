@@ -54,6 +54,8 @@ public class TicTacToeControllerImpl implements TicTacToeController {
         model.undo();
         turnCounter--;
         tryAppend("Move undone\n" + model.getGameState() + "\n");
+        LocationState playersTurn = getPlayersTurn(model, turnCounter);
+        tryAppend("\n\n" + playersTurn.toString() + " players turn: \n\n");
       }
       else if (isValidInput(val, command.size())) {
         command.add(val);
@@ -64,40 +66,10 @@ public class TicTacToeControllerImpl implements TicTacToeController {
       }
       if (command.size() == 4) {
         try {
-          if(model instanceof OnePlayerImpl) {
-            model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
-                    Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.RED);
-            tryAppend(model.getGameState() + "\n\nRed players turn:\n");
-          }
-          else if(model instanceof TwoPlayerImpl) {
-            if(turnCounter % 2 == 0) {
-              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
-                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.RED);
-              tryAppend(model.getGameState() + "\nWhite players turn:\n");
-            }
-            else if(turnCounter % 2 == 1) {
-              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
-                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.WHITE);
-              tryAppend(model.getGameState() + "\nRed players turn:\n");
-            }
-          }
-          else if(model instanceof ThreePlayerImpl) {
-            if(turnCounter % 3 == 0) {
-              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
-                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.RED);
-              tryAppend(model.getGameState() + "\nWhite players turn:\n");
-            }
-            else if(turnCounter % 3 == 1) {
-              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
-                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.WHITE);
-              tryAppend(model.getGameState() + "\nBlack players turn:\n");
-            }
-            else if(turnCounter % 3 == 2) {
-              model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
-                      Integer.parseInt(command.get(2)), handleDirection(command.get(3)), LocationState.BLACK);
-              tryAppend(model.getGameState() + "\nRed players turn:\n");
-            }
-          }
+          LocationState playersTurn = getPlayersTurn(model, turnCounter);
+          model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
+                  Integer.parseInt(command.get(2)), handleDirection(command.get(3)),playersTurn);
+          tryAppend("\n\n" + model.getGameState() + playersTurn.toString() + " players turn: \n\n");
           turnCounter++;
           command.clear();
         } catch (IllegalArgumentException ex) {
@@ -111,6 +83,33 @@ public class TicTacToeControllerImpl implements TicTacToeController {
       }
     }
     throw new IllegalStateException();
+  }
+
+  private LocationState getPlayersTurn(TicTacToeModel model, int turnCounter) {
+    if(model instanceof OnePlayerImpl) {
+      return LocationState.RED;
+    }
+    else if(model instanceof TwoPlayerImpl) {
+      if(turnCounter % 2 == 0) {
+        return LocationState.WHITE;
+      }
+      else {
+        return LocationState.RED;
+      }
+    }
+    else if(model instanceof ThreePlayerImpl) {
+      if(turnCounter % 3 == 0) {
+        return LocationState.WHITE;
+      }
+      else if(turnCounter % 3 == 1) {
+        return LocationState.BLACK;
+      }
+      else {
+        return LocationState.RED;
+      }
+    }
+    tryAppend("Turn calc failure");
+    return null;
   }
 
   private void tryAppend(String msg) {
