@@ -69,7 +69,9 @@ public class TicTacToeControllerImpl implements TicTacToeController {
           LocationState playersTurn = getPlayersTurn(model, turnCounter);
           model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
                   Integer.parseInt(command.get(2)), handleDirection(command.get(3)),playersTurn);
-          tryAppend("\n\n" + model.getGameState() + playersTurn.toString() + " players turn: \n\n");
+          if(!model.isGameOver()) {
+            tryAppend("\n\n" + model.getGameState() + playersTurn.toString() + " players turn: \n\n");
+          }
           turnCounter++;
           command.clear();
         } catch (IllegalArgumentException ex) {

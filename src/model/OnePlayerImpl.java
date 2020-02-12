@@ -3,13 +3,17 @@ package model;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.System.exit;
+
 public class OnePlayerImpl extends TicTacToeModelImpl {
 
   private LocationState computerColor = LocationState.WHITE;
   private LocationState playerColor = LocationState.RED;
+  private int level;
 
-  public OnePlayerImpl(boolean computerFirst) {
+  public OnePlayerImpl(boolean computerFirst, int level) {
     super();
+    this.level = level;
     while(countColor(LocationState.BLACK) < 9) {
       int x = new Random().nextInt(3);
       int y = new Random().nextInt(3);
@@ -17,7 +21,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
       board[x][y][z] = LocationState.BLACK;
     }
     if(computerFirst) {
-      computerMove();
+      computerMove(level);
     }
   }
 
@@ -55,20 +59,55 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      computerMove();
+      computerMove(this.level);
     }
   }
 
   //picks random spot and direction (Computer is always white, you are always red)
-  private void computerMove() {
-    //if can win now, do, if not, continue
+  private void computerMove(int level) {
+    switch (level) {
+      case 1:
+        lvl1Move();
+        break;
+      case 2:
+        lvl2Move();
+        break;
+      case 3:
+        lvl3Move();
+        break;
+      case 4:
+        lvl4Move();
+        break;
+      default:
+          System.out.print("\nInternal level handling error\n");
+          exit(1);
+    }
+  }
+
+  private void lvl1Move() {
+    randomMove();
+  }
+
+  private void lvl2Move() {
+    if(!winningMove()) {
+      randomMove();
+    }
+  }
+
+  private void lvl3Move() {
+    if(!winningMove()) {
+      if (!betterDefendingMove()) {
+        betterRandomMove();
+      }
+    }
+  }
+
+  private void lvl4Move() {
     if(!winningMove()) {
       if(!winInTwo()) {
-        //if(!moveWhereTheyDontWinInTwo()) {
-          if (!betterDefendingMove()) {
-            betterRandomMove();
-          }
-        //}
+        if (!betterDefendingMove()) {
+          betterRandomMove();
+        }
       }
     }
   }
@@ -78,7 +117,17 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getBetterRandomMove(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\n(ran)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      super.move(move.x,move.y,move.z,move.dir,move.player);
+    }
+  }
+
+  // chooses a move completely at random
+  private void randomMove() {
+    TesterModel tester = new TesterModel(this.board);
+    Move move= tester.getRandomMove(computerColor);
+    if(move != null) {
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
     }
   }
@@ -88,7 +137,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getBetterDefendingMove(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\n(def)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }
@@ -101,7 +150,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getMoveWhereTheyDontWinInTwo(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\n(theydontwinin2)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }
@@ -114,7 +163,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getWinInTwo(computerColor,playerColor);
     if(move != null) {
-      System.out.print("\n\n(win2)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }
@@ -126,7 +175,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     TesterModel tester = new TesterModel(this.board);
     Move move = tester.getWinningMove(computerColor);
     if(move != null) {
-      System.out.print("\n\n(win)Computers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
       super.move(move.x,move.y,move.z,move.dir,move.player);
       return true;
     }

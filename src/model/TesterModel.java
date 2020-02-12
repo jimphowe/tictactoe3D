@@ -127,6 +127,19 @@ public class TesterModel extends ThreePlayerImpl {
     }
   }
 
+  Move getRandomMove(LocationState player) {
+    ArrayList<Move> potentialMoves = new ArrayList<>();
+    for(Move move : getPossibleMoves(player)) {
+      potentialMoves.add(move);
+    }
+    if(potentialMoves.size() != 0) {
+      return potentialMoves.get(rand.nextInt(potentialMoves.size()));
+    }
+    else {
+      return null;
+    }
+  }
+
   private int getNumDoubles(LocationState player) {
     int doubles = 0;
     for(ArrayList<BoardLocation> run : runs) {

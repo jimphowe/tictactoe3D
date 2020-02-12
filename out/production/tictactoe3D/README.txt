@@ -16,7 +16,51 @@ placing a piece is the selected spot is empty.
 
 
 
-How to play:
+----------------------------How to play-------------------------------
+
+
+Example Board:
++----------------------
+| ∖   _      _      _   ∖
+|   ∖                     ∖
+|     ∖   _      _    BLACK ∖            <------ Top Layer
+|       ∖                     ∖
+|         ∖  RED   WHITE  BLACK ∖
+|          ---------------------|
+|     _   |BLACK  BLACK         |
+|         |                     |
+|         _      _      _       |        <------ Middle Layer
+|         |                     |
+|         |   _    BLACK    _   |
+|         |                     |
+ ∖ BLACK  BLACK  BLACK          |
+   ∖      |                     |
+     ∖   _      _      _        |        <------ Bottom Layer
+       ∖  |                     |
+         ∖| BLACK    _      _   |
+           ---------------------+
+
+
+Board with coordinates:
++----------------------
+| ∖ (0,2,0)(1,2,0)(2,2,0)∖
+|   ∖                      ∖
+|     ∖ (0,1,0)(1,1,0)(2,1,0)∖
+|       ∖                     ∖
+|         ∖(0,0,0)(1,0,0)(2,0,0)∖
+|          ---------------------|
+|  (0,2,1)(1,2,1)(2,2,1)        |
+|         |                     |
+|       (0,1,1)(1,1,1)(2,1,1)   |
+|         |                     |
+|         |(0,0,1)(1,0,1)(2,0,1)|
+|         |                     |
+ ∖ (0,2,2)(1,2,2)(2,2,2)        |
+   ∖      |                     |
+     ∖  (0,1,2)(1,1,2)(2,1,2)   |
+       ∖  |                     |
+         ∖|(0,0,2)(1,0,2)(2,0,2)|
+           ---------------------+
 
 
 At any point, type 'q' to quit, or 'u' to undo the last move.
@@ -40,16 +84,20 @@ Direction is one of(any case):
     FRONT / F
     BACK / B
 
-On a given players turn, type in all five of these parameters in the correct order, then hit enter
-to submit the move. A move must also be possible. You can't choose a position on the bottom of the
+The first pos value is left(0) to right(2)
+The second pos value is front(0) to back(2)
+The third pos value is top(0) to bottom(2)
+
+On a given players turn, type in all four of these parameters in the correct order, then hit enter
+to submit the move.
+
+A move must also be possible. You can't choose a position on the bottom of the
 board, and try to push "down". You can also not make a move which would push one piece out of the
 board. Lastly you cannot make a move from the center(1,1,1) of the board, all moves must start on
 the outer reachable portion.
 
 
-
-
-Modes:
+-------------------------------Modes-----------------------------
 
 1 player:
 

@@ -8,6 +8,7 @@ import model.TwoPlayerImpl;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -31,15 +32,22 @@ public class Game {
         case "1":
           System.out.print("Would you like to go first or second?\n");
           String turn = scan.next();
-          ArrayList<String> turnOptions = new ArrayList<>(Arrays.asList("F","FIRST","S","SECOND"));
+          ArrayList<String> turnOptions = new ArrayList<>(Arrays.asList("1","F","FIRST","2","S","SECOND"));
           while(!turnOptions.contains(turn.toUpperCase())) {
             System.out.print("Please enter a valid choice (first or second)\n");
             turn = scan.next();
           }
-          if (turn.toUpperCase().equals("FIRST") || turn.toUpperCase().equals("F")) {
-            model = new OnePlayerImpl(false);
-          } else if (turn.toUpperCase().equals("SECOND") || turn.toUpperCase().equals("S")) {
-            model = new OnePlayerImpl(true);
+          System.out.print("What difficulty level would you prefer? (1, 2, 3, or 4)\n");
+          String level = scan.next();
+          ArrayList<String> levelOptions = new ArrayList<>(Arrays.asList("1","2","3","4"));
+          while(!levelOptions.contains(level)) {
+            System.out.print("Please enter a valid choice (1, 2, 3, or 4)\n");
+            level = scan.next();
+          }
+          if (turn.toUpperCase().equals("FIRST") || turn.toUpperCase().equals("F") || turn.equals("1")) {
+            model = new OnePlayerImpl(false,Integer.parseInt(level));
+          } else if (turn.toUpperCase().equals("SECOND") || turn.toUpperCase().equals("S") || turn.equals("2")) {
+            model = new OnePlayerImpl(true,Integer.parseInt(level));
           } else {
             throw new IllegalStateException();
           }
