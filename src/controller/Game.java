@@ -37,11 +37,11 @@ public class Game {
             System.out.print("Please enter a valid choice (first or second)\n");
             turn = scan.next();
           }
-          System.out.print("What difficulty level would you prefer? (1, 2, 3, or 4)\n");
+          System.out.print("What difficulty level would you prefer? (1, 2, or 3)\n");
           String level = scan.next();
-          ArrayList<String> levelOptions = new ArrayList<>(Arrays.asList("1","2","3","4"));
+          ArrayList<String> levelOptions = new ArrayList<>(Arrays.asList("1","2","3"));
           while(!levelOptions.contains(level)) {
-            System.out.print("Please enter a valid choice (1, 2, 3, or 4)\n");
+            System.out.print("Please enter a valid choice (1, 2, or 3)\n");
             level = scan.next();
           }
           if (turn.toUpperCase().equals("FIRST") || turn.toUpperCase().equals("F") || turn.equals("1")) {

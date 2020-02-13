@@ -75,9 +75,6 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
       case 3:
         lvl3Move();
         break;
-      case 4:
-        lvl4Move();
-        break;
       default:
           System.out.print("\nInternal level handling error\n");
           exit(1);
@@ -85,16 +82,12 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
   }
 
   private void lvl1Move() {
-    randomMove();
-  }
-
-  private void lvl2Move() {
     if(!winningMove()) {
       randomMove();
     }
   }
 
-  private void lvl3Move() {
+  private void lvl2Move() {
     if(!winningMove()) {
       if (!betterDefendingMove()) {
         betterRandomMove();
@@ -102,7 +95,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     }
   }
 
-  private void lvl4Move() {
+  private void lvl3Move() {
     if(!winningMove()) {
       if(!winInTwo()) {
         if (!betterDefendingMove()) {
