@@ -69,10 +69,11 @@ public class TicTacToeControllerImpl implements TicTacToeController {
           LocationState playersTurn = getPlayersTurn(model, turnCounter);
           model.move(Integer.parseInt(command.get(0)), Integer.parseInt(command.get(1)),
                   Integer.parseInt(command.get(2)), handleDirection(command.get(3)),playersTurn);
+          turnCounter++;
+          playersTurn = getPlayersTurn(model, turnCounter);
           if(!model.isGameOver()) {
             tryAppend("\n\n" + model.getGameState() + playersTurn.toString() + " players turn: \n\n");
           }
-          turnCounter++;
           command.clear();
         } catch (IllegalArgumentException ex) {
           command.clear();
@@ -93,21 +94,21 @@ public class TicTacToeControllerImpl implements TicTacToeController {
     }
     else if(model instanceof TwoPlayerImpl) {
       if(turnCounter % 2 == 0) {
-        return LocationState.WHITE;
+        return LocationState.RED;
       }
       else {
-        return LocationState.RED;
+        return LocationState.WHITE;
       }
     }
     else if(model instanceof ThreePlayerImpl) {
       if(turnCounter % 3 == 0) {
-        return LocationState.WHITE;
+        return LocationState.RED;
       }
       else if(turnCounter % 3 == 1) {
-        return LocationState.BLACK;
+        return LocationState.WHITE;
       }
       else {
-        return LocationState.RED;
+        return LocationState.BLACK;
       }
     }
     tryAppend("Turn calc failure");

@@ -56,7 +56,6 @@ public class TesterModel extends ThreePlayerImpl {
       if(getWinInTwo(player2,player1) != null && getWinningMove(player2) != null) {
         return move;
       }
-
       reset();
     }
     return null;
@@ -128,10 +127,7 @@ public class TesterModel extends ThreePlayerImpl {
   }
 
   Move getRandomMove(LocationState player) {
-    ArrayList<Move> potentialMoves = new ArrayList<>();
-    for(Move move : getPossibleMoves(player)) {
-      potentialMoves.add(move);
-    }
+    ArrayList<Move> potentialMoves = new ArrayList<>(getPossibleMoves(player));
     if(potentialMoves.size() != 0) {
       return potentialMoves.get(rand.nextInt(potentialMoves.size()));
     }
