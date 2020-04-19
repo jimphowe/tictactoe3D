@@ -65,116 +65,90 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
 
   //picks random spot and direction (Computer is always white, you are always red)
   private void computerMove(int level) {
+    Move move = null;
     switch (level) {
       case 1:
-        lvl1Move();
+        move = lvl1Move();
         break;
       case 2:
-        lvl2Move();
+        move = lvl2Move();
         break;
       case 3:
-        lvl3Move();
+        move = lvl3Move();
         break;
       default:
           System.out.print("\nInternal level handling error\n");
           exit(1);
     }
+    System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+    super.move(move.x,move.y,move.z,move.dir,move.player);
   }
 
-  private void lvl1Move() {
-    if(!winningMove()) {
-      randomMove();
+  private Move lvl1Move() {
+    Move move = winningMove();
+    if(move == null) {
+      move = randomMove();
     }
+    return move;
   }
 
-  private void lvl2Move() {
-    if(!winningMove()) {
-      if (!betterDefendingMove()) {
-        betterRandomMove();
+  private Move lvl2Move() {
+    Move move = winningMove();
+    if(move == null) {
+      move = betterDefendingMove();
+      if(move == null) {
+        move = betterRandomMove();
       }
     }
+    return move;
   }
 
-  private void lvl3Move() {
-    if(!winningMove()) {
-      if(!winInTwo()) {
-        if (!betterDefendingMove()) {
-          betterRandomMove();
+  private Move lvl3Move() {
+    Move move = winningMove();
+    if(move == null) {
+      move = winInTwo();
+      if(move == null) {
+        move = betterDefendingMove();
+        if(move == null) {
+          move = betterRandomMove();
         }
       }
     }
+    return move;
   }
 
   // chooses move which maximises 2 in a rows
-  private void betterRandomMove() {
+  private Move betterRandomMove() {
     TesterModel tester = new TesterModel(this.board);
-    Move move = tester.getBetterRandomMove(computerColor,playerColor);
-    if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
-      super.move(move.x,move.y,move.z,move.dir,move.player);
-    }
+    return tester.getBetterRandomMove(computerColor,playerColor);
   }
 
   // chooses a move completely at random
-  private void randomMove() {
+  private Move randomMove() {
     TesterModel tester = new TesterModel(this.board);
-    Move move= tester.getRandomMove(computerColor);
-    if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
-      super.move(move.x,move.y,move.z,move.dir,move.player);
-    }
+    return tester.getRandomMove(computerColor);
   }
 
   //leaves opponent with no 2 in a rows and maximizes own two in a rows
-  private boolean betterDefendingMove() {
+  private Move betterDefendingMove() {
     TesterModel tester = new TesterModel(this.board);
-    Move move = tester.getBetterDefendingMove(computerColor,playerColor);
-    if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
-      super.move(move.x,move.y,move.z,move.dir,move.player);
-      return true;
-    }
-    else {
-      return false;
-    }
+    return tester.getBetterDefendingMove(computerColor,playerColor);
   }
 
-  private boolean moveWhereTheyDontWinInTwo() {
+  private Move moveWhereTheyDontWinInTwo() {
     TesterModel tester = new TesterModel(this.board);
-    Move move = tester.getMoveWhereTheyDontWinInTwo(computerColor,playerColor);
-    if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
-      super.move(move.x,move.y,move.z,move.dir,move.player);
-      return true;
-    }
-    else {
-      return false;
-    }
+    return tester.getMoveWhereTheyDontWinInTwo(computerColor,playerColor);
   }
 
-  private boolean winInTwo() {
+  private Move winInTwo() {
     TesterModel tester = new TesterModel(this.board);
-    Move move = tester.getWinInTwo(computerColor,playerColor);
-    if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
-      super.move(move.x,move.y,move.z,move.dir,move.player);
-      return true;
-    }
-    return false;
+    return tester.getWinInTwo(computerColor,playerColor);
   }
 
   //wins the game if possible(ties aren't accounted for)
-  private boolean winningMove() {
+  private Move winningMove() {
     TesterModel tester = new TesterModel(this.board);
-    Move move = tester.getWinningMove(computerColor);
-    if(move != null) {
-      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
-      super.move(move.x,move.y,move.z,move.dir,move.player);
-      return true;
-    }
-    else {
-      return false;
-    }
+    return tester.getWinningMove(computerColor);
   }
 
   @Override
