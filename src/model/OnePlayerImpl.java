@@ -20,8 +20,11 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
       int z = new Random().nextInt(3);
       board[x][y][z] = LocationState.BLACK;
     }
+    // If the computer is going first, just go random, don't waste time thinking
     if(computerFirst) {
-      computerMove(level);
+      Move move = randomMove();
+      System.out.print("\n\nComputers move: " + move.x + " " + move.y + " " + move.z + " " + move.dir.toString() + "\n\n");
+      super.move(move.x,move.y,move.z,move.dir,move.player);
     }
   }
 
@@ -87,7 +90,10 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
   private Move lvl1Move() {
     Move move = winningMove();
     if(move == null) {
-      move = randomMove();
+      move = defendingMove();
+      if(move == null) {
+        move = randomMove();
+      }
     }
     return move;
   }
@@ -97,57 +103,65 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     if(move == null) {
       move = betterDefendingMove();
       if(move == null) {
-        move = betterRandomMove();
+        move = randomMove();
       }
     }
     return move;
   }
 
   private Move lvl3Move() {
-    Move move = winningMove();
-    if(move == null) {
-      move = winInTwo();
-      if(move == null) {
-        move = betterDefendingMove();
-        if(move == null) {
-          move = betterRandomMove();
+      Move move = winningMove();
+      if (move == null) {
+        move = winInTwo();
+        if (move == null) {
+          move = bestDefendingMove();
+          if (move == null) {
+            move = betterDefendingMove();
+            if (move == null) {
+              move = randomMove();
+            }
+          }
         }
       }
-    }
-    return move;
-  }
-
-  // chooses move which maximises 2 in a rows
-  private Move betterRandomMove() {
-    TesterModel tester = new TesterModel(this.board);
-    return tester.getBetterRandomMove(computerColor,playerColor);
+      return move;
   }
 
   // chooses a move completely at random
   private Move randomMove() {
     TesterModel tester = new TesterModel(this.board);
+    //System.out.print("Random");
     return tester.getRandomMove(computerColor);
+  }
+
+  private Move defendingMove() {
+    TesterModel tester = new TesterModel(this.board);
+    //System.out.print("Defending");
+    return tester.getDefendingMove(computerColor,playerColor);
   }
 
   //leaves opponent with no 2 in a rows and maximizes own two in a rows
   private Move betterDefendingMove() {
     TesterModel tester = new TesterModel(this.board);
+    //System.out.print("BetterDefending");
     return tester.getBetterDefendingMove(computerColor,playerColor);
   }
 
-  private Move moveWhereTheyDontWinInTwo() {
+  private Move bestDefendingMove() {
     TesterModel tester = new TesterModel(this.board);
-    return tester.getMoveWhereTheyDontWinInTwo(computerColor,playerColor);
+    //System.out.print("BestDefending");
+    return tester.getBestDefendingMove(computerColor,playerColor);
   }
 
   private Move winInTwo() {
     TesterModel tester = new TesterModel(this.board);
+    //System.out.print("WinInTwo");
     return tester.getWinInTwo(computerColor,playerColor);
   }
 
   //wins the game if possible(ties aren't accounted for)
   private Move winningMove() {
     TesterModel tester = new TesterModel(this.board);
+    //System.out.print("Winning");
     return tester.getWinningMove(computerColor);
   }
 

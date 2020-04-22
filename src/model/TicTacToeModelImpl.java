@@ -196,7 +196,7 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
   }
 
   //for debugging
-  private void printHistory() {
+  void printHistory() {
     int i = 1;
     for(LocationState[][][] oldBoard : previousBoards) {
       System.out.print("Board: " + i + oldBoard[0][0][0] + "\n\n");
