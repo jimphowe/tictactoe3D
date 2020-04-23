@@ -1,6 +1,15 @@
 Welcome to a text based TicTacToe! In 3 dimensions!
 
 
+To run the game:
+
+1. Download the JAR file to a local directory
+
+2. Run the game with the command: java -jar [filepath-of-jar]
+
+
+
+
 The rules are as follows:
 
 
