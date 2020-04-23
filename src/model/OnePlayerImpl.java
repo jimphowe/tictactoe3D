@@ -54,11 +54,11 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
     if(!isGameOver()) {
       try {
         System.out.print(".\n");
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.MILLISECONDS.sleep(700);
         System.out.print(".\n");
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.MILLISECONDS.sleep(700);
         System.out.print(".\n");
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.MILLISECONDS.sleep(700);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
