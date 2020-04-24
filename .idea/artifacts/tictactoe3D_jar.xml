@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="tictactoe3D:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/tictactoe3D_jar</output-path>
+    <root id="archive" name="tictactoe3D.jar">
+      <element id="module-output" name="tictactoe3D" />
+    </root>
+  </artifact>
+</component>

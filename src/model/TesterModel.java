@@ -56,6 +56,14 @@ public class TesterModel extends ThreePlayerImpl {
     for(Move move : getPossibleMoves(player1)) {
       move(move.x, move.y, move.z, move.dir, move.player);
       int numOpponentWins = getNumWinInTwo(player2, player1);
+      //SPECIAL, TO REMOVE:
+      /*
+      if(numOpponentWins >= 1 && getWinningMove(player2) == null) {
+        System.out.println("Opponent ways to win: " + numOpponentWins);
+        return move;
+      }
+      */
+
       if(getWinningMove(player2) == null && numOpponentWins == minOpponentWins) {
         if(getNumDoubles(player1) == maxDoubles) {
           potentialMoves.add(move);
