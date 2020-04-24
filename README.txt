@@ -133,6 +133,12 @@ Play against a friend. Black balls will be filled in at random and are neutral.
 Play against two other people, the board will start empty.
 
 
+Puzzle mode! (BETA):
 
+In this mode you will be given a list of puzzle to choose from, asking you to win in 1 move, prevent a win, or more difficult tasks.
+At any point you can type q to exit the current puzzle, and then q again to exit puzzle mode. To complete the puzzle type in a move as
+normal, such as "0 1 0 RIGHT", and the game will tell you whether your move is correct or not.
+
+In the future this mode will show you why your incorrect guesses are incorrect, by showing the computers next move.
 
 ENJOY!

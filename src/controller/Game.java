@@ -86,7 +86,8 @@ public class Game {
   }
 
   private static void printRules() {
-    System.out.println("Make sure you have read the README before starting\n1, 2, or 3 players?");
+    System.out.println("Make sure you have read the README before starting\n\n1, 2, or 3 players?" +
+            " Or 'p' for puzzles");
   }
 
 }

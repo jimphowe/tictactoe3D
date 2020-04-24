@@ -68,11 +68,13 @@ public class TesterModel extends ThreePlayerImpl {
         if(getNumDoubles(player1) == maxDoubles) {
           potentialMoves.add(move);
         }
+        /*
         else if(getNumDoubles(player1) > maxDoubles) {
           potentialMoves.clear();
           potentialMoves.add(move);
           maxDoubles = getNumDoubles(player1);
         }
+        */
       }
       else if(getWinningMove(player2) == null && numOpponentWins < minOpponentWins) {
         potentialMoves.clear();
@@ -84,7 +86,7 @@ public class TesterModel extends ThreePlayerImpl {
     }
     if(potentialMoves.size() != 0) {
       //Cool fact ->
-      //System.out.println("choose from " + potentialMoves.size() + " moves! Opponent ways to win: " + minOpponentWins);
+      System.out.println("choose from " + potentialMoves.size() + " moves! Opponent ways to win: " + minOpponentWins);
       return potentialMoves.get(rand.nextInt(potentialMoves.size()));
     }
     else {
