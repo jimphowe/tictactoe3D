@@ -48,71 +48,29 @@ public class TesterModel extends ThreePlayerImpl {
     return null;
   }
 
-  // returns a move where player2 cant win in either 1 or two moves, and maximizes own doubles
+  // returns a move where player2 cant win in either 1 or two moves, and if not possible to stop
+  // wins in two, minimizes them
   Move getBestDefendingMove(LocationState player1, LocationState player2) {
     ArrayList<Move> potentialMoves = new ArrayList<>();
-    int maxDoubles = -1;
     int minOpponentWins = 100;
     for(Move move : getPossibleMoves(player1)) {
       move(move.x, move.y, move.z, move.dir, move.player);
       int numOpponentWins = getNumWinInTwo(player2, player1);
-      //SPECIAL, TO REMOVE:
-      /*
-      if(numOpponentWins >= 1 && getWinningMove(player2) == null) {
-        System.out.println("Opponent ways to win: " + numOpponentWins);
-        return move;
-      }
-      */
-
-      if(getWinningMove(player2) == null && numOpponentWins == minOpponentWins) {
-        if(getNumDoubles(player1) == maxDoubles) {
+      if(getWinningMove(player2) == null) {
+        if(numOpponentWins == minOpponentWins) {
           potentialMoves.add(move);
         }
-        /*
-        else if(getNumDoubles(player1) > maxDoubles) {
+        else if(numOpponentWins < minOpponentWins) {
           potentialMoves.clear();
           potentialMoves.add(move);
-          maxDoubles = getNumDoubles(player1);
+          minOpponentWins = numOpponentWins;
         }
-        */
-      }
-      else if(getWinningMove(player2) == null && numOpponentWins < minOpponentWins) {
-        potentialMoves.clear();
-        potentialMoves.add(move);
-        minOpponentWins = numOpponentWins;
-        maxDoubles = getNumDoubles(player1);
       }
       undo();
     }
     if(potentialMoves.size() != 0) {
       //Cool fact ->
-      System.out.println("choose from " + potentialMoves.size() + " moves! Opponent ways to win: " + minOpponentWins);
-      return potentialMoves.get(rand.nextInt(potentialMoves.size()));
-    }
-    else {
-      return null;
-    }
-  }
-
-  // returns a move where player2 cant win in either 1 or two moves, and maximizes own doubles
-  Move old_getBestDefendingMove(LocationState player1, LocationState player2) {
-    ArrayList<Move> potentialMoves = new ArrayList<>();
-    int maxDoubles = -1;
-    for(Move move : getPossibleMoves(player1)) {
-      move(move.x, move.y, move.z, move.dir, move.player);
-      if(getWinningMove(player2) == null && getWinInTwo(player2, player1) == null) {
-        if(getNumDoubles(player1) == maxDoubles) {
-          potentialMoves.add(move);
-        }
-        else if(getNumDoubles(player1) > maxDoubles) {
-          potentialMoves.clear();
-          potentialMoves.add(move);
-          maxDoubles = getNumDoubles(player1);
-        }
-      }
-      undo();
-    }
-    if(potentialMoves.size() != 0) {
+      //System.out.println("choose from " + potentialMoves.size() + " moves! Opponent ways to win: " + minOpponentWins);
       return potentialMoves.get(rand.nextInt(potentialMoves.size()));
     }
     else {
@@ -165,7 +123,7 @@ public class TesterModel extends ThreePlayerImpl {
     }
   }
 
-  // We couldn't defend... only happens if position is lost
+  // Choose a random valid move
   Move getRandomMove(LocationState player) {
     ArrayList<Move> potentialMoves = new ArrayList<>(getPossibleMoves(player));
     if(potentialMoves.size() != 0) {
@@ -212,7 +170,7 @@ public class TesterModel extends ThreePlayerImpl {
     }
   }
 
-  int getNumWinInTwo(LocationState player1, LocationState player2) {
+  private int getNumWinInTwo(LocationState player1, LocationState player2) {
     // loop through all computer moves
     int count = 0;
     for(Move move : getPossibleMoves(player1)) {

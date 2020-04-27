@@ -90,10 +90,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
   private Move lvl1Move() {
     Move move = winningMove();
     if(move == null) {
-      move = defendingMove();
-      if(move == null) {
-        move = randomMove();
-      }
+      move = randomMove();
     }
     return move;
   }
@@ -101,7 +98,7 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
   private Move lvl2Move() {
     Move move = winningMove();
     if(move == null) {
-      move = betterDefendingMove();
+      move = defendingMove();
       if(move == null) {
         move = randomMove();
       }
