@@ -372,5 +372,4 @@ abstract public class TicTacToeModelImpl implements TicTacToeModel {
     }
     return copy;
   }
-
 }

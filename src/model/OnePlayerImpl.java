@@ -111,14 +111,17 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
       if (move == null) {
         move = winInTwo();
         if (move == null) {
-          move = bestDefendingMove();
-          if (move == null) {
-            move = betterDefendingMove();
+          //move = winInThree();
+          //if (move == null) {
+            move = bestDefendingMove();
             if (move == null) {
-              move = randomMove();
+              move = betterDefendingMove();
+              if (move == null) {
+                move = randomMove();
+              }
             }
           }
-        }
+        //}
       }
       return move;
   }
@@ -126,39 +129,45 @@ public class OnePlayerImpl extends TicTacToeModelImpl {
   // chooses a move completely at random
   private Move randomMove() {
     TesterModel tester = new TesterModel(this.board);
-    //System.out.print("Random");
+    System.out.print("Random");
     return tester.getRandomMove(computerColor);
   }
 
   private Move defendingMove() {
     TesterModel tester = new TesterModel(this.board);
-    //System.out.print("Defending");
+    System.out.print("Defending");
     return tester.getDefendingMove(computerColor,playerColor);
   }
 
   //leaves opponent with no 2 in a rows and maximizes own two in a rows
   private Move betterDefendingMove() {
     TesterModel tester = new TesterModel(this.board);
-    //System.out.print("BetterDefending");
+    System.out.print("BetterDefending");
     return tester.getBetterDefendingMove(computerColor,playerColor);
   }
 
   private Move bestDefendingMove() {
     TesterModel tester = new TesterModel(this.board);
-    //System.out.print("BestDefending");
+    System.out.print("BestDefending");
     return tester.getBestDefendingMove(computerColor,playerColor);
   }
 
   private Move winInTwo() {
     TesterModel tester = new TesterModel(this.board);
-    //System.out.print("WinInTwo");
+    System.out.print("WinInTwo");
     return tester.getWinInTwo(computerColor,playerColor);
+  }
+
+  private Move winInThree() {
+    TesterModel tester = new TesterModel(this.board);
+    System.out.print("WinIn33333");
+    return tester.getWinInThree(computerColor,playerColor);
   }
 
   //wins the game if possible(ties aren't accounted for)
   private Move winningMove() {
     TesterModel tester = new TesterModel(this.board);
-    //System.out.print("Winning");
+    System.out.print("Winning");
     return tester.getWinningMove(computerColor);
   }
 

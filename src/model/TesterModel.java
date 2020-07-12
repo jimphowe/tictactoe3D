@@ -25,6 +25,34 @@ public class TesterModel extends ThreePlayerImpl {
     return null;
   }
 
+  Move getWinInThree(LocationState player1, LocationState player2) {
+    // loop through all computer moves
+    ArrayList<Move> potentialMoves = new ArrayList<>();
+    for(Move move : getPossibleMoves(player1)) {
+      move(move.x,move.y,move.z,move.dir,move.player);
+      boolean found = true;
+      if(getWinInTwo(player2,player1) == null) {
+        for (Move inner : getPossibleMoves(player2)) {
+          move(inner.x, inner.y, inner.z, inner.dir, inner.player);
+          if (getWinInTwo(player1,player2) == null) {
+            found = false;
+          }
+          undo();
+        }
+      }
+      else {
+        found = false;
+      }
+      undo();
+      if (found) { potentialMoves.add(move); }
+    }
+    if(potentialMoves.size() > 0) {
+      System.out.println("*****CHOSE FROM " + potentialMoves.size() + " MOVES*****");
+      return potentialMoves.get(0);
+    }
+    return null;
+  }
+
   Move getWinInTwo(LocationState player1, LocationState player2) {
     // loop through all computer moves
     for(Move move : getPossibleMoves(player1)) {
@@ -49,7 +77,7 @@ public class TesterModel extends ThreePlayerImpl {
   }
 
   // returns a move where player2 cant win in either 1 or two moves, and if not possible to stop
-  // wins in two, minimizes them
+  // wins in two, minimizes them. Also has a bias towards corner moves
   Move getBestDefendingMove(LocationState player1, LocationState player2) {
     ArrayList<Move> potentialMoves = new ArrayList<>();
     int minOpponentWins = 100;
@@ -70,7 +98,16 @@ public class TesterModel extends ThreePlayerImpl {
     }
     if(potentialMoves.size() != 0) {
       //Cool fact ->
-      //System.out.println("choose from " + potentialMoves.size() + " moves! Opponent ways to win: " + minOpponentWins);
+      System.out.println("choose from " + potentialMoves.size() + " moves! Opponent ways to win: " + minOpponentWins);
+      ArrayList<Move> betterMoves = new ArrayList<>();
+      for(Move move : potentialMoves) {
+        if(isCornerMove(move)) {
+          betterMoves.add(move);
+        }
+      }
+      if(betterMoves.size() != 0) {
+        return betterMoves.get(rand.nextInt(betterMoves.size()));
+      }
       return potentialMoves.get(rand.nextInt(potentialMoves.size()));
     }
     else {
@@ -168,6 +205,10 @@ public class TesterModel extends ThreePlayerImpl {
     for(Move move : moves) {
       System.out.println(move.x + " " + move.y + " " + move.z + " " + move.dir.toString());
     }
+  }
+
+  private boolean isCornerMove(Move move) {
+    return move.x % 2 == 0 && move.y % 2 == 0 && move.z % 2 == 0;
   }
 
   private int getNumWinInTwo(LocationState player1, LocationState player2) {

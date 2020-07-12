@@ -141,4 +141,36 @@ normal, such as "0 1 0 RIGHT", and the game will tell you whether your move is c
 
 In the future this mode will show you why your incorrect guesses are incorrect, by showing the computers next move.
 
+
+
+            _                 _
+           (_)               | |
+  ___ _ __  _  ___  _   _    | |
+ / _ \ '_ \| |/ _ \| | | |   | |
+|  __/ | | | | (_) | |_| |   | |
+ \___|_| |_| |\___/ \__, |   |_|
+          _/ |       __/ |    _
+         |__/       |___/    |_|
+
+
+
+--------IN PROGRESS--------
+
+
+Competitive mode (plans)
+
+This is a 2 player competitive game mode.
+
+As set up, you will pick the number of games played, and a time limit. P1 has a large advantage, so these series
+will have an even number of rounds. Winning is the person who wins the most games, but if there's a
+tie, which is likely at a high level, the winning is the one who played the least moves as P1 and the
+most moves as P2 (P2moves - P1moves).
+
+This rewards very accurate play. Some games might be lost, but there might be a single move which forces
+the game to continue one more round. Similarly, sometimes a game can be won many ways, but one move wins in
+2 moves while the rest win in 3, this system rewards finding those moves.
+
+Finally, you have to balance how long you spend looking for the best move at different stages, because you
+only have a set amount of time to make all your moves in a game.
+
 ENJOY!
